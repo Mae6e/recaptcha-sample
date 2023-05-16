@@ -1,10 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const appRouter = require('./appRouter');
 
 const app = express();
 
 //? access the req.body
 app.use(express.json());
+
+//? parse incoming form data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //? serve static files from the "public" directory
 app.use(express.static('public'));
