@@ -30,7 +30,7 @@
     }
 
     grecaptcha.ready(function() {
-        grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', {action: 'submit-form'})
+        grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', {action: 'demo'})
             .then(function(token) {
                 document.querySelector('#send_button').addEventListener('click', handleClick(token));
             });
