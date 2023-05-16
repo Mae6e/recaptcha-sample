@@ -7,6 +7,10 @@ const router = express.Router();
 //? define a route for submit form
 router.post('/submit-form', async (req, res) => {
     try {
+        
+        //?log
+        console.log('req',req);
+        console.log('body',req.body);
 
         const userToken = req.body.recaptchaToken;
         if (!userToken) {

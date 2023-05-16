@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>reCAPTCHA v3 Example</title>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
-  </head>
-  <body>
-    <form id="myForm" action="/submit-form" method="POST">
 
-      <div id="my-recaptcha"></div>
-      
-      <button id="submit-btn" type="submit" disabled>Submit</button>
+<body>
+    <form method="POST" action="/form">
+        <div id="recaptcha-container"></div>
+        <button type="submit">Submit</button>
     </form>
-    
-    <script>
-      function onSubmit(token) {
-        document.getElementById("myForm").submit();
-      }
 
-      grecaptcha.ready(function() {
-        grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', {action: 'your_action_name'}).then(function(token) {
-          document.getElementById('my-recaptcha').innerHTML = '<input type="hidden" name="recaptchaToken" value="' + token + '">';
-          document.getElementById('submit-btn').disabled = false; // enable submit button
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' }).then(function (token) {
+                var recaptchaResponse = document.createElement('input');
+                recaptchaResponse.setAttribute('type', 'hidden');
+                recaptchaResponse.setAttribute('name', 'recaptchaToken');
+                recaptchaResponse.setAttribute('value', token);
+                document.getElementById('recaptcha-container').appendChild(recaptchaResponse);
+            });
         });
-      });
     </script>
-  </body>
+</body>
+
 </html>
