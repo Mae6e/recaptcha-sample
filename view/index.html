@@ -1,24 +1,39 @@
-<!DOCTYPE html>
-<html>
+<h1>reCAPTCHA v3 Demo</h1>
+<button type="button" id="send_button">Send</button>
+<hr>
+<div id="result"></div>
 
-<body>
-    <form method="POST" action="/submit-form">
-        <div id="recaptcha-container"></div>
-        <button type="submit">Submit</button>
-    </form>
+<script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
+<script>
+    function showResult(text) {
+        document.querySelector('#result').innerHTML = text;
+    }
 
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
-    <script>
-        grecaptcha.ready(function () {
-            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit-form' }).then(function (token) {
-                var recaptchaResponse = document.createElement('input');
-                recaptchaResponse.setAttribute('type', 'hidden');
-                recaptchaResponse.setAttribute('name', 'recaptchaToken');
-                recaptchaResponse.setAttribute('value', token);
-                document.getElementById('recaptcha-container').appendChild(recaptchaResponse);
+    function handleClick(token) {
+        return function() {
+            var data = {
+                recaptchaToken: token
+            };
+
+            fetch('/submit', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(text => showResult(text))
+                .catch(error => showResult(error));
+        }
+    }
+
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', {action: 'submit-form'})
+            .then(function(token) {
+                document.querySelector('#send_button').addEventListener('click', handleClick(token));
             });
-        });
-    </script>
-</body>
+    });
+</script>
 
-</html>

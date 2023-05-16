@@ -5,7 +5,7 @@ const verifyRecaptchaToken = require('./utils/verifyRecaptchaToken');
 const router = express.Router();
 
 //? define a route for submit form
-router.post('/submit-form', async (req, res) => {
+router.post('/submit', async (req, res) => {
     try {
         
         //?log
