@@ -9,7 +9,6 @@ router.post('/submit-form', async (req, res) => {
     try {
         
         //?log
-        console.error('req',req);
         console.error('body',req.body);
 
         const userToken = req.body.recaptchaToken;
