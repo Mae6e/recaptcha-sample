@@ -21,7 +21,7 @@ async function verifyRecaptchaToken(token) {
         });
 
         //?log
-        console.log(response.data);
+        console.error(response.data);
 
         //? get response
         return response.data.success;
