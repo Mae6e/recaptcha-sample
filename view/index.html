@@ -7,11 +7,6 @@
 <script>
     function showResult(text) {
         document.querySelector('#result').innerHTML = text;
-
-        grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
-            .then(function (token) {
-                document.querySelector('#send_button').addEventListener('click', handleClick(token));
-            });
     }
 
     function handleClick(token) {
