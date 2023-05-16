@@ -5,34 +5,60 @@
 
 <script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
 <script>
-    function showResult(text) {
-        document.querySelector('#result').innerHTML = text;
-    }
+    // function showResult(text) {
+    //     document.querySelector('#result').innerHTML = text;
+    // }
 
-    function handleClick(token) {
-        return function () {
-            var data = {
-                recaptchaToken: token
-            };
+    // function handleClick(token) {
+    //     return function () {
+    //         var data = {
+    //             recaptchaToken: token
+    //         };
 
-            fetch('/submit', {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'post',
-                body: JSON.stringify(data)
-            })
-                .then(response => response.text())
-                .then(text => showResult(text))
-                .catch(error => showResult(error));
-        }
-    }
+    //         fetch('/submit', {
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             method: 'post',
+    //             body: JSON.stringify(data)
+    //         })
+    //             .then(response => response.text())
+    //             .then(text => showResult(text))
+    //             .catch(error => showResult(error));
+    //     }
+    // }
 
-    grecaptcha.ready(function () {
-        grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
-            .then(function (token) {
-                document.querySelector('#send_button').addEventListener('click', handleClick(token));
-            });
-    });
+    // grecaptcha.ready(function () {
+    //     grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
+    //         .then(function (token) {
+    //             document.querySelector('#send_button').addEventListener('click', handleClick(token));
+    //         });
+    // });
+
+  function handleClick(token) {
+  return function() {
+    grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
+      .then(function(newToken) {
+        var data = {
+          recaptchaToken: newToken
+        };
+
+        fetch('/submit', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'post',
+          body: JSON.stringify(data)
+        })
+        .then(response => response.text())
+        .then(text => showResult(text))
+        .catch(error => showResult(error));
+      });
+  }
+}
+
+document.querySelector('#send_button').addEventListener('click', handleClick());
+
 </script>
