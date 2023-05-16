@@ -20,6 +20,9 @@ async function verifyRecaptchaToken(token) {
             }
         });
 
+        //?log
+        console.log(response.data);
+
         //? get response
         return response.data.success;
     } catch (error) {

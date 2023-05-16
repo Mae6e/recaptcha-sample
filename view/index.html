@@ -40,37 +40,29 @@
         document.querySelector('#result').innerHTML = text;
     }
 
+    function handleClick(token) {
+        return function () {
+            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
+                .then(function (newToken) {
+                    var data = {
+                        recaptchaToken: newToken
+                    };
 
-    function handleClick() {
-        var token = grecaptcha.getResponse();
-        if (token == '') {
-            alert('Please complete the captcha!');
-        } else {
-            var data = {
-                recaptchaToken: token
-            };
-
-            fetch('/submit', {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'post',
-                body: JSON.stringify(data)
-            })
-                .then(response => response.text())
-                .then(text => showResult(text))
-                .catch(error => showResult(error));
-
-            // Reset the captcha widget
-            grecaptcha.reset();
+                    fetch('/submit', {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'post',
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.text())
+                        .then(text => showResult(text))
+                        .catch(error => showResult(error));
+                });
         }
     }
 
-    grecaptcha.ready(function () {
-        var submitButton = document.querySelector('#send_button');
-        submitButton.addEventListener('click', handleClick);
-    });
-
+    document.querySelector('#send_button').addEventListener('click', handleClick());
 
 </script>
