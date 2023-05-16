@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>reCAPTCHA Test</title>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</head>
-<body>
-<h1>reCAPTCHA Test</h1>
-<form action="/submit-form" method="post">
-<div class="g-recaptcha" data-sitekey="6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></div>
-<input type="hidden" name="recaptchaToken" id="recaptchaToken">
-<br><br>
-<input type="submit" value="Submit">
-</form>
-<script>
-function onSubmit(token) {
-document.getElementById("recaptchaToken").value = token;
-document.getElementById("form").submit();
-}
-</script>
-</body>
+  <head>
+    <title>reCAPTCHA v3 Example</title>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
+  </head>
+  <body>
+    <form id="myForm" action="/submit-form" method="POST">
+
+      <div id="my-recaptcha"></div>
+      
+      <button id="submit-btn" type="submit" disabled>Submit</button>
+    </form>
+    
+    <script>
+      function onSubmit(token) {
+        document.getElementById("myForm").submit();
+      }
+
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', {action: 'your_action_name'}).then(function(token) {
+          document.getElementById('my-recaptcha').innerHTML = '<input type="hidden" name="recaptchaToken" value="' + token + '">';
+          document.getElementById('submit-btn').disabled = false; // enable submit button
+        });
+      });
+    </script>
+  </body>
 </html>
