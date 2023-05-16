@@ -2,7 +2,7 @@
 <html>
 
 <body>
-    <form method="POST" action="/form">
+    <form method="POST" action="/submit-form">
         <div id="recaptcha-container"></div>
         <button type="submit">Submit</button>
     </form>
@@ -10,7 +10,7 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
     <script>
         grecaptcha.ready(function () {
-            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'form' }).then(function (token) {
+            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit-form' }).then(function (token) {
                 var recaptchaResponse = document.createElement('input');
                 recaptchaResponse.setAttribute('type', 'hidden');
                 recaptchaResponse.setAttribute('name', 'recaptchaToken');
