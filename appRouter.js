@@ -9,8 +9,8 @@ router.post('/submit-form', async (req, res) => {
     try {
         
         //?log
-        console.log('req',req);
-        console.log('body',req.body);
+        console.error('req',req);
+        console.error('body',req.body);
 
         const userToken = req.body.recaptchaToken;
         if (!userToken) {
