@@ -36,29 +36,33 @@
     //         });
     // });
 
-  function handleClick(token) {
-  return function() {
-    grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
-      .then(function(newToken) {
-        var data = {
-          recaptchaToken: newToken
-        };
+    function showResult(text) {
+        document.querySelector('#result').innerHTML = text;
+    }
 
-        fetch('/submit', {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: 'post',
-          body: JSON.stringify(data)
-        })
-        .then(response => response.text())
-        .then(text => showResult(text))
-        .catch(error => showResult(error));
-      });
-  }
-}
+    function handleClick(token) {
+        return function () {
+            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
+                .then(function (newToken) {
+                    var data = {
+                        recaptchaToken: newToken
+                    };
 
-document.querySelector('#send_button').addEventListener('click', handleClick());
+                    fetch('/submit', {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'post',
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.text())
+                        .then(text => showResult(text))
+                        .catch(error => showResult(error));
+                });
+        }
+    }
+
+    document.querySelector('#send_button').addEventListener('click', handleClick());
 
 </script>
