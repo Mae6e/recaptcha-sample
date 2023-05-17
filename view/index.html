@@ -57,7 +57,10 @@
                         body: JSON.stringify(data)
                     })
                         .then(response => response.text())
-                        .then(text => showResult(text))
+                        .then(text => {
+                            showResult(text);
+                            console.log(text);
+                        })
                         .catch(error => showResult(error));
                 });
         }
