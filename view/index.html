@@ -1,5 +1,6 @@
 <h1>reCAPTCHA v3 Demo</h1>
 <button type="button" id="send_button">Send</button>
+<button type="button" id="get_button">Get</button>
 <hr>
 <div id="result"></div>
 
@@ -36,6 +37,21 @@
         }
     }
 
+
+      function getToken(token) {
+        return function () {
+            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
+                .then(function (newToken) {
+                    var data = {
+                        recaptchaToken: newToken
+                    };
+
+                    showResult(JSON.stringify(data));
+                });
+        }
+    }
+
     document.querySelector('#send_button').addEventListener('click', handleClick());
+    document.querySelector('#get_button').addEventListener('click', getToken());
 
 </script>
