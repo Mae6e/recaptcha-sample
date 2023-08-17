@@ -41,12 +41,8 @@
       function getToken(token) {
         return function () {
             grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
-                .then(function (newToken) {
-                    var data = {
-                        recaptchaToken: newToken
-                    };
-
-                    showResult(JSON.stringify(data));
+                .then(function (newToken) {            
+                    showResult(newToken);
                 });
         }
     }
