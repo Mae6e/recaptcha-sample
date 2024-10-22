@@ -4,7 +4,7 @@
 <hr>
 <div id="result"></div>
 
-<script src="https://www.google.com/recaptcha/api.js?render=6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LdToWgqAAAAADziTPJHSIlYNUIl6HYd9-Ph4j4P"></script>
 <script>
   
     function showResult(text) {
@@ -13,7 +13,7 @@
 
     function handleClick(token) {
         return function () {
-            grecaptcha.execute('6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv', { action: 'submit' })
+            grecaptcha.execute('6LdToWgqAAAAADziTPJHSIlYNUIl6HYd9-Ph4j4P', { action: 'submit' })
                 .then(function (newToken) {
                     var data = {
                         recaptchaToken: newToken
