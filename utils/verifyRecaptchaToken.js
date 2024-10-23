@@ -1,6 +1,6 @@
 const axios = require('axios');
 //sitekey = 6LdhDxMmAAAAAACA0Qg7pS1zoN4a-qbF3NJHVwXv
-const recaptchaSecretKey = '6LdToWgqAAAAAP8eHmd4VJ05-w1qdPoII8aqbiQq';
+const recaptchaSecretKey = '6LdhDxMmAAAAAIOjui66DrgRjQciEPHpiZ7grvuR';
 
 async function verifyRecaptchaToken(token) {
     try {
